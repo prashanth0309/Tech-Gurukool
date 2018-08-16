@@ -37,6 +37,7 @@ export class Gallery {
     schoolimage:SchoolImage[];
     image: string;
     tg_id:any;
+    update_ind:any;
     
     @ViewChild(Slides) slides: Slides;
     @ViewChild('myvideo') myVideo: any;
@@ -63,14 +64,15 @@ export class Gallery {
             case "Images":
                 {
                      this.schoolimage = [];
-                     this.getimage(this.school_id, 'I', this.token, this.tg_id)
+                     this.update_ind = 'I'                     
+                     this.getimage(this.school_id, this.update_ind, this.token, this.tg_id)
 
-                    break
+                    break;
                 }
             case "Videos":
                 {
                  
-                    break
+                    break;
                 }
         }
     }
@@ -146,8 +148,8 @@ export class Gallery {
                 this.imageProvider
         
                 .galleryimage(this.school_id,scimage,this.token,this.tg_id)
-        
-                .subscribe(res => {this.successToastreturn("Successfully upload", "center")},
+    
+                .subscribe(res => {this.successToastreturn("Successfully uploaded", "center"),this.reload()},
         
                           err => {this.errorToast("Failed to upload: ","center")}
         
@@ -193,7 +195,7 @@ export class Gallery {
         
                 .galleryimage(this.school_id, scimage, this.token, this.tg_id)
         
-                .subscribe(res => {this.successToastreturn("successfully upload","center")},
+                .subscribe(res => {this.successToastreturn("successfully uploaded","center"),this.reload()},
         
                           err => {this.errorToast("Failed to upload: ", "center")}
         
@@ -209,7 +211,7 @@ export class Gallery {
 
 
     
-          presentActionSheet() {
+   presentActionSheet() {
     
         let actionSheet = this.actionSheetCtrl.create({
       title: 'Upload Gallery',
@@ -253,7 +255,7 @@ export class Gallery {
     console.log ("I am coming here to fetch image sessions")
     this.imageProvider
                 .getgalleryimage(school_id, update_ind, token, tg_id)
-                .subscribe(res => { this.schoolimage = < SchoolImage[] > res, this.check(), console.log("i am in the success part")
+                .subscribe(res => { this.schoolimage = < SchoolImage[] > res, this.loader.dismiss(), this.check(), console.log("i am in the success part")
                     },
                            err => {console.log("i am in the error part")
                     });
@@ -266,22 +268,22 @@ export class Gallery {
                 console.log(i.url + i.id +"check")
                      console.log("image" + i.url + this.image)
             }
-        }
+       }
 
     imagedelete(id:number, token:string, tg_id:number) {
         this.imageProvider
             .deleteImage(id, token, tg_id)
             .subscribe(res => {
-                this.loader.dismiss(), this.successToastreturn('Record deleted', 'middle'),this.reload()
+                this.loader.dismiss(), this.successToastreturn('Image deleted Successfully', 'middle'),this.reload()
                 },
                 err => {
-                    this.errorToast('Record not deleted', 'middle')
+                    this.errorToast('Image not deleted', 'middle')
                 });
     }
 
     reload() {
                      this.schoolimage=[]
-                     this.getimage(this.school_id, 'I', this.token, this.tg_id)
+                     this.getimage(this.school_id, this.update_ind, this.token, this.tg_id)
     }
 
     delete(x) {
@@ -292,8 +294,8 @@ export class Gallery {
             buttons: [{
                     text: 'Delete ',
                     handler: () => {
+                        this.loading();                        
                         this.imagedelete(x.id, this.token, this.tg_id)
-                        
                     }
                 },
                 {

@@ -24,21 +24,21 @@ export class Compliant {
     message: any;
     compliant: Template = new Template();
     comp: Template[];
-    parent:any;
-    student_id:any;
+    parent: any;
+    student_id: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
-                public alertCtrl: AlertController, public toastCtrl: ToastController, public globalVars: GlobalVars,
-                public loadingController: LoadingController, public notifyProvider: NotificationProvider) {
+        public alertCtrl: AlertController, public toastCtrl: ToastController, public globalVars: GlobalVars,
+        public loadingController: LoadingController, public notifyProvider: NotificationProvider) {
 
-                this.token = this.globalVars.getMyGlobalToken();
-                this.id = this.globalVars.getMyGlobalUserId();
-                this.parent = this.globalVars.getMyGlobalParent();
-                this.school_id = this.globalVars.getMyGlobalschool();
-                this.student_id= this.parent[0].parent_student_id
+        this.token = this.globalVars.getMyGlobalToken();
+        this.id = this.globalVars.getMyGlobalUserId();
+        this.parent = this.globalVars.getMyGlobalParent();
+        this.school_id = this.globalVars.getMyGlobalschool();
+        this.student_id = this.parent[0].parent_student_id
     }
 
-    postCompliant(temp: Template, student_id:number, school_id: number, token: string, id: number) {
+    postCompliant(temp: Template, student_id: number, school_id: number, token: string, id: number) {
         this.notifyProvider
             .addCompliant(temp, student_id, school_id, token, id)
             .subscribe(res => {
@@ -58,7 +58,7 @@ export class Compliant {
     }
 
     loading() {
-        
+
         this.loader = this.loadingController.create({
             content: "Please wait"
         });
@@ -78,7 +78,7 @@ export class Compliant {
                         this.compliant.school_id = this.school_id;
                         this.compliant.update_ind = 'C'
 
-                        this.postCompliant(this.compliant, this.student_id,this.school_id, this.token, this.id)
+                        this.postCompliant(this.compliant, this.student_id, this.school_id, this.token, this.id)
                     }
                 },
                 {

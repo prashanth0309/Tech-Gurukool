@@ -11,6 +11,7 @@ import { Menu } from '../menu/menu';
 import { Storage } from '@ionic/storage';
 import { Login } from '../../pages/login/login';
 
+
 @Component({
     selector: 'page-otp',
     templateUrl: 'otp.html',
@@ -56,7 +57,7 @@ Submit() {
         obj.mobile = this.parm_login_key; //'98401234';
         obj.otp = this.otpNo;  //' 9476';
         console.log('in here:');
-
+        
         this.storage.get('user').then((val) => {
             let u: User = val;
             if (u == null)
@@ -84,7 +85,6 @@ Submit() {
                             this.navCtrl.push(Menu);
                         
                         })
-                        
                     },
                     
                     err => {

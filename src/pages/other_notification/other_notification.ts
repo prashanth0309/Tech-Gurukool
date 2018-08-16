@@ -24,13 +24,13 @@ export class Other_Notification {
     school_id: number;
     id: number;
     message: any;
-    date:Date;
-    current_date:any;
+    date: Date;
+    current_date: any;
     event: EventsClass[];
-    selected_activity:any;
-    selected_title:any;
-    selected_message:any;
-    class_id:any;
+    selected_activity: any;
+    selected_title: any;
+    selected_message: any;
+    class_id: any;
     evnt: Notification = new Notification();
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
@@ -43,26 +43,26 @@ export class Other_Notification {
         this.school_id = this.globalVars.getMyGlobalschool();
         this.current_date = this.globalVars.getMyGlobaltodate()
         this.date = new Date();
-        this.date.setDate( this.date.getDate() + 3 );
-    
-}
-    
-     getevents(activity:string , token: string, id: number) {
-            this.eventsprovider
-                .getevents(activity, token, id)
-                .subscribe(res => {
-                        this.event = < EventsClass[] > res,this.successToastreturn('Record updated', 'middle')
-                    },
-                    err => {
-                        this.errorToast('Record not updated', 'middle');
-                        this.loader.dismiss()
-                    }
-                );
-        }
+        this.date.setDate(this.date.getDate() + 3);
 
-    addeventnotification( event:Notification, school_id:number, token: string, id: number) {
+    }
+
+    getevents(activity: string, token: string, id: number) {
         this.eventsprovider
-            .addeventnotification( event, school_id ,token, id)
+            .getevents(activity, token, id)
+            .subscribe(res => {
+                    this.event = < EventsClass[] > res, this.successToastreturn('Record updated', 'middle')
+                },
+                err => {
+                    this.errorToast('Record not updated', 'middle');
+                    this.loader.dismiss()
+                }
+            );
+    }
+
+    addeventnotification(event: Notification, school_id: number, token: string, id: number) {
+        this.eventsprovider
+            .addeventnotification(event, school_id, token, id)
             .subscribe(res => {
                     this.successToastreturn('Record updated', 'middle'), this.reset()
                 },
@@ -73,15 +73,15 @@ export class Other_Notification {
             );
     }
 
-    reset(){
+    reset() {
         this.selected_title = ''
         this.selected_message = ''
 
     }
 
-    select_event(){
+    select_event() {
 
-             this.getevents(this.selected_activity , this.token, this.id) 
+        this.getevents(this.selected_activity, this.token, this.id)
 
     }
 
@@ -105,29 +105,29 @@ export class Other_Notification {
 
     }
 
-    save(){
+    save() {
 
         this.evnt.school_id = this.school_id
         this.evnt.from_date = this.current_date
         this.evnt.to_date = this.date.toISOString()
         this.evnt.title = this.selected_title
         this.evnt.message = this.selected_message
-        this.evnt.class_id=0
-         this.addeventnotification( this.evnt, this.school_id, this.token, this.id)
+        this.evnt.class_id = 0
+        this.addeventnotification(this.evnt, this.school_id, this.token, this.id)
 
     }
 
     presentPopover(myEvent) {
-        
-    let popover = this.popoverCtrl.create(PopoverPage, {
-        
-    });
-        
-    popover.present({
-    ev: myEvent
-        
-    });
-        
-  }
+
+        let popover = this.popoverCtrl.create(PopoverPage, {
+
+        });
+
+        popover.present({
+            ev: myEvent
+
+        });
+
+    }
 
 }

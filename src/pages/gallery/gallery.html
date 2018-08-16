@@ -28,7 +28,7 @@
         <div *ngSwitchCase="'Images'">
            <br/>               
            <ion-card-header align="center" class="itg"> Upload Images       
-            <img class="gi"  src="assets/img/upload.png" (click)="presentActionSheet()"/> 
+            <img class="gi"  src="assets/img/images.png" (click)="presentActionSheet()"/> 
            </ion-card-header> 
         <br/>
                 <ion-slides (ionSlideDidChange)="slideChanged()"  class="image-slider" loop="true">                   
@@ -41,11 +41,11 @@
 <div *ngSwitchCase="'Videos'">
       
             <br/>
-            <ion-card-header align="center" class="itg"> Upload Videos       
-             <img class="gi"  src="assets/img/upload.png" (click)="ActionSheet()"/> 
+            <ion-card-header align="center" class="itg"> Upload Videos   
+             <img class="gi"  src="assets/img/videos.png" (click)="ActionSheet()"/> 
 <!--<img class="gi"  src="assets/img/trash.png"/>  -->
             </ion-card-header>
-         <ion-slides (ionSlideDidChange)="slideChanged()"  paginationType="bullets" loop="true" pager="true">
+         <ion-slides (ionSlideDidChange)="slideChanged()"  loop="true" >
             <ion-slide >
               <video type="video/mp4" #myvideo height="300" width="300" controls>           
         <!-- <source [src]="" type="video/mp4" />-->

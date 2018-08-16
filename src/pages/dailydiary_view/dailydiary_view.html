@@ -45,7 +45,7 @@
    
                     <ion-item (click)="showrow(y)" *ngIf="!y.expand">
                         <ion-avatar item-left>
-                            <div id="avt"><img src="assets/img/exams2.png"></div>
+                            <img src="assets/img/reading.png"/>
                         </ion-avatar>
                         <h2><b>{{y.title}}</b> </h2>
                         <p>{{y.message}}</p>
@@ -53,7 +53,7 @@
                     </ion-item>
                     <ion-item text-wrap (click)="showrow(y)" *ngIf="y.expand">
                         <ion-avatar class="ion">
-                            <div id="avt"><img src="assets/img/exams2.png"></div>
+                            <img src="assets/img/reading.png"/>
                         </ion-avatar>
                         <h2><b>{{y.title}}</b> </h2>
 
@@ -107,7 +107,7 @@
                 <ion-item-sliding #slidingItem *ngFor="let z of activity_diary_notification">
                     <ion-item (click)="showrow(z)">
                         <ion-avatar item-left>
-                            <div id="avt"><img src="assets/img/exams2.png"></div>
+                            <img src="assets/img/writing.png">
                         </ion-avatar>
                         <h2><b> {{z.title}} </b></h2>
                         <p> {{z.message}} </p>

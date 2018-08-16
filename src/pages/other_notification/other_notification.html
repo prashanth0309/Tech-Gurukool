@@ -13,35 +13,35 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding><br/>
-   <ion-card>
-    <ion-item>
+    <ion-card>
+        <ion-item>
             <ion-label class="www" stacked>Activity</ion-label>
             <ion-select [(ngModel)]="selected_activity" (ionChange)="select_event()" interface="popover">
-                    <ion-option>Club</ion-option>
-                    <ion-option>Sports</ion-option>
-                    <ion-option>House</ion-option>
-                    <ion-option>Extra-Curricular Activities</ion-option>
+                <ion-option>Club</ion-option>
+                <ion-option>Sports</ion-option>
+                <ion-option>House</ion-option>
+                <ion-option>Extra-Curricular Activities</ion-option>
             </ion-select>
         </ion-item>
-        </ion-card><br/>
-<ion-card>
-    
-<ion-item>         
-            <ion-label class="www" stacked>Title</ion-label>                   
-            
-            <ion-select [(ngModel)]="selected_title">
-               <ion-option  *ngFor="let t of event">{{t.name}}</ion-option>                                  
-            </ion-select>  
-        </ion-item>
-       <br/> 
-<ion-item>
-       <ion-label class="www" stacked> Message </ion-label>
+    </ion-card><br/>
+    <ion-card>
 
-         <ion-textarea [(ngModel)]="selected_message" autocomplete="on" spellcheck="true" type="text" ></ion-textarea>
-        
-</ion-item>
-</ion-card>
- <div align="middle">
-    <button  ion-button color="secondary" (click)="save()"> Send </button>
+        <ion-item>
+            <ion-label class="www" stacked>Title</ion-label>
+
+            <ion-select [(ngModel)]="selected_title">
+                <ion-option *ngFor="let t of event">{{t.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <br/>
+        <ion-item>
+            <ion-label class="www" stacked> Message </ion-label>
+
+            <ion-textarea [(ngModel)]="selected_message" autocomplete="on" spellcheck="true" type="text"></ion-textarea>
+
+        </ion-item>
+    </ion-card>
+    <div align="middle">
+        <button ion-button color="secondary" (click)="save()"> Send </button>
     </div>
 </ion-content>

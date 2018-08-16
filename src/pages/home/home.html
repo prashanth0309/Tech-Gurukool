@@ -55,16 +55,16 @@
                 <br>
 
                 <ion-item-sliding class="animated fadeInLeft" *ngFor="let x of abt_page_admin">
-                    <ion-item text-wrap>
+                  <ion-item text-wrap>
                         <ion-avatar item-left>
-                            <div id="avt"><img src="assets/img/exams2.png"></div>
+                         <img src="assets/img/notification.png"/>
                         </ion-avatar>
 
                         <h2> {{x.title}} </h2>
                         <p> {{x.message}} </p>
 
                     </ion-item>
-
+                    
                 </ion-item-sliding>
             </div>
             <p>
@@ -89,7 +89,7 @@
 
                     <ion-item text-wrap>
                         <ion-avatar item-left>
-                            <div id="avt"><img src="assets/img/exams2.png"></div>
+                        <img src="assets/img/notification.png"/>
                         </ion-avatar>
                         <h2> {{x.title}} </h2>
                         <p> {{x.message}} </p>
@@ -116,12 +116,12 @@
                 <ion-item-sliding #slidingItem *ngFor="let y of daily_diary_notification">
                     <ion-item text-wrap (click)="HomeView(y)">
                         <ion-avatar item-left>
-                            <div id="avt"><img src="assets/img/exams2.png"></div>
+                            <img src="assets/img/reading.png"/>
                         </ion-avatar>
 
-                        <h2><img id="tik" *ngIf="y.status!=='Done'" src="assets/img/black.png"><img id="tik" *ngIf="y.status== 'Done'" src="assets/img/blue.png">{{y.title}}</h2>
+                        <h2><img class="tik" *ngIf="y.status!=='Done'" src="assets/img/black.png"><img class="tik" *ngIf="y.status== 'Done'" src="assets/img/blue.png">{{y.title}}</h2>
 
-                        <p id="dda">{{y.message}}</p>
+                        <p class="dda">{{y.message}}</p>
 
                         <p *ngIf="Home"> Subject:{{y.subject}}</p>
                         <p *ngIf="Home">Due date:{{y.end_date}}</p>
@@ -169,12 +169,12 @@
                 <ion-item-sliding #slidingItem *ngFor="let z of activity_diary_notification">
                     <ion-item (click)="HomeView(z)" text-wrap>
                         <ion-avatar item-left>
-                            <div id="avt"><img src="assets/img/exams2.png"></div>
+                           <img src="assets/img/writing.png"/>
                         </ion-avatar>
 
-                        <h2 text-wrap><img id="tik" *ngIf="z.status!=='Done'" src="assets/img/black.png"><img id="tik" *ngIf="z.status== 'Done'" src="assets/img/blue.png">{{z.title}}</h2>
+                        <h2 text-wrap><img class="tik" *ngIf="z.status!=='Done'" src="assets/img/black.png"><img class="tik" *ngIf="z.status== 'Done'" src="assets/img/blue.png">{{z.title}}</h2>
 
-                        <p id="dda">{{z.message}} </p>
+                        <p class="dda">{{z.message}} </p>
 
                         <p *ngIf="Home"> Subject:{{z.subject}}</p>
                         <p *ngIf="Home"><b>Due date</b>{{z.end_date}}</p>
@@ -242,19 +242,14 @@
                     </ion-card>
                 </div>
                 <ion-item-sliding class="animated fadeInLeft" *ngFor="let x of abt_page_admin">
-
-
-                    <ion-item text-wrap>
-                        <ion-avatar item-left>
-                            <div id="avt"><img src="assets/img/exams2.png"></div>
-                        </ion-avatar>
-
-                        <h2> {{x.title}} </h2>
-                        <p> {{x.message}} </p>
-
-                    </ion-item>
-
-                </ion-item-sliding>
+                   <ion-item text-wrap>                            
+                      <ion-avatar item-left>
+                   <img src="assets/img/notification.png"/>
+                 </ion-avatar>
+                     <h2> {{x.title}} </h2>                  
+                     <p> {{x.message}} </p>
+                 </ion-item>
+              </ion-item-sliding>
             </div>
             <div *ngIf="!animated">
 
@@ -269,19 +264,14 @@
                 </ion-card>
 
                 <ion-item-sliding *ngFor="let x of abt_page_admin">
-
-
-                    <ion-item text-wrap>
+                   <ion-item text-wrap>                            
                         <ion-avatar item-left>
-                            <div id="avt"><img src="assets/img/exams2.png"></div>
-                        </ion-avatar>
-
-                        <h2> {{x.title}} </h2>
-                        <p> {{x.message}} </p>
-
+                        <img src="assets/img/notification.png"/>
+                     </ion-avatar>
+                     <h2> {{x.title}} </h2>                  
+                      <p> {{x.message}} </p>
                     </ion-item>
-                </ion-item-sliding>
-
+             </ion-item-sliding>
                 <p>
                 </p>
                 <p>
@@ -340,21 +330,25 @@
                 </ion-card>
             </div>
             <ion-item-sliding *ngFor="let x of abt_page_notification">
-
-
-                <ion-item text-wrap>
-                    <ion-avatar item-left>
-                        <div id="avt"><img src="assets/img/exams2.png"></div>
-                    </ion-avatar>
-
-                    <h2> {{x.title}} </h2>
+                    <ion-item text-wrap>                            
+                <ion-avatar item-left>
+                    <img src="assets/img/notification.png"/>
+                  </ion-avatar>
+                   <h2> {{x.title}} </h2>                  
                     <p> {{x.message}} </p>
-
                 </ion-item>
-
             </ion-item-sliding>
-
-
+           <!-- <ion-card *ngFor="let x of abt_page_notification">
+                        <ion-item text-wrap>
+                          <ion-avatar item-left>
+                                <div id="avt" ><img src="assets/img/exams2.png"></div>
+                            </ion-avatar>
+                          <h2>{{x.title}} </h2>
+                        </ion-item>  
+                        <ion-card-content>
+                                <p>{{x.message}}</p>
+                            </ion-card-content>                          
+            </ion-card>-->
             <p>
             </p>
             <p>
@@ -362,7 +356,4 @@
 
         </div>
     </div>
-
-
-
 </ion-content>

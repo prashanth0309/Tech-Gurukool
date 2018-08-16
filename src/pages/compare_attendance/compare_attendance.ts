@@ -22,64 +22,64 @@ export class absentInfo {
 
 export class Compare_Attendance {
 
-parm_standard:any;
-parm_section:any;
-parm_class_id:any;
-token:string;
-id:number; 
-student_list: Bus[];
-absent_list: Bus[];
-absent_info: absentInfo[]
+    parm_standard: any;
+    parm_section: any;
+    parm_class_id: any;
+    token: string;
+    id: number;
+    student_list: Bus[];
+    absent_list: Bus[];
+    absent_info: absentInfo[]
 
 
     constructor(public loadingController: LoadingController, public navCtrl: NavController,
-                public navParams: NavParams, public globalVars: GlobalVars, public busProvider:BusProvider,
-                public toastController: ToastController,public popoverCtrl: PopoverController) {
+        public navParams: NavParams, public globalVars: GlobalVars, public busProvider: BusProvider,
+        public toastController: ToastController, public popoverCtrl: PopoverController) {
 
-                this.parm_standard = this.navParams.get('parm_standard');
-                this.parm_section = this.navParams.get('parm_section');
-                this.parm_class_id = this.globalVars.getMyGlobalClass_id(this.parm_standard, this.parm_section)
-                this.token   = this.globalVars.getMyGlobalToken();
-                this.id = this.globalVars.getMyGlobalUserId();
-                console.log(this.parm_class_id)
-                this.absent_info = new Array < absentInfo > ();
+        this.parm_standard = this.navParams.get('parm_standard');
+        this.parm_section = this.navParams.get('parm_section');
+        this.parm_class_id = this.globalVars.getMyGlobalClass_id(this.parm_standard, this.parm_section)
+        this.token = this.globalVars.getMyGlobalToken();
+        this.id = this.globalVars.getMyGlobalUserId();
+        console.log(this.parm_class_id)
+        this.absent_info = new Array < absentInfo > ();
 
-                this.fetchAttndStudent( this.parm_class_id, this.token, this.id) 
-
-        }
-
-    select(y){
-
-        this.fetchabsentlist( y.tg_id, this.token, this.id)
+        this.fetchAttndStudent(this.parm_class_id, this.token, this.id)
 
     }
 
-    fetchAttndStudent( class_id: number, token: string, id:number) {
+    select(y) {
+
+        this.fetchabsentlist(y.tg_id, this.token, this.id)
+
+    }
+
+    fetchAttndStudent(class_id: number, token: string, id: number) {
 
         this.busProvider
             .getBusStudentClass(class_id, token, id)
             .subscribe(res => {
-                     this.student_list = <Bus[] > res
+                    this.student_list = < Bus[] > res
                 },
                 err => {
                     this.errorToast("Record not loaded", "middle")
                 });
     }
 
-    fetchabsentlist( student_id: number, token: string, id:number) {
+    fetchabsentlist(student_id: number, token: string, id: number) {
 
         this.busProvider
             .getBusAbsent_list(student_id, token, id)
             .subscribe(res => {
-                     this.absent_list = <Bus[] > res
+                    this.absent_list = < Bus[] > res
                 },
                 err => {
                     this.errorToast("Record not loaded", "middle")
                 });
     }
-    
+
     private errorToast(msg: string, pos: string) {
-    
+
         let toast = this.toastController.create({
             message: msg,
             duration: 1000,
@@ -90,7 +90,7 @@ absent_info: absentInfo[]
     }
 
     private successToast(msg: string, pos: string) {
-    
+
         let toast = this.toastController.create({
             message: msg,
             duration: 1000,
@@ -101,16 +101,16 @@ absent_info: absentInfo[]
     }
 
     presentPopover(myEvent) {
-        
-    let popover = this.popoverCtrl.create(PopoverPage, {
-        
-    });
-        
-    popover.present({
-    ev: myEvent
-        
-    });
-        
-  }
-  
+
+        let popover = this.popoverCtrl.create(PopoverPage, {
+
+        });
+
+        popover.present({
+            ev: myEvent
+
+        });
+
+    }
+
 }

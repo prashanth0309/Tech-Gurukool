@@ -7,6 +7,7 @@ import { AlertController } from 'ionic-angular';
 import { EventsClass } from '../../models/events';
 import { EventsProvider } from '../../providers/event-provider';
 
+
 @Component({
     templateUrl: 'events.html',
     selector: 'period-page'

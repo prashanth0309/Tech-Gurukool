@@ -39,16 +39,16 @@
       </div>-->
     
      
-      <div formArrayName="items"  *ngFor="let item of form.get('items').controls; let i = index;" class="frw">
+     <div formArrayName="items"  *ngFor="let item of form.get('items').controls; let i = index;" class="frw">
       <div [formGroupName]="i">
           <ion-item-divider  class="faid">Option {{ i + 1 }}</ion-item-divider>
           <ion-item>                                    
-        <ion-input type="text"  maxlength="50" autocomplete="on" spellcheck="true" formControlName="options"></ion-input>
+        <ion-input type="text" maxlength="50" autocomplete="on" spellcheck="true" formControlName="options"></ion-input>
         <ion-toggle  toogle-class="toggle-balanced" formControlName="isRightAnswer"> </ion-toggle>       
           </ion-item>
       </div>
       </div>
-
+      
       <div align="middle">        
       <div  style="color:black" ion-button  icon-left clear (click)="addItem()">
       <ion-icon  color="secondary" name="add"></ion-icon>
@@ -72,6 +72,27 @@
   <ion-icon name="add"></ion-icon>
   Add 
 </div><br><br><br><br>-->
+<!--<div formArrayName="forms"  *ngFor="let form of form.get('forms').controls; let i = index;" class="frw">
+  <div [formGroupName]="i">
+      <ion-item-divider  class="faid">Option {{ i + 1 }}</ion-item-divider>
+      <ion-item>                                    
+    <ion-input type="text" maxlength="50" autocomplete="on" spellcheck="true" formControlName="options"></ion-input>
+    <ion-toggle  toogle-class="toggle-balanced" formControlName="isRightAnswer"> </ion-toggle>       
+      </ion-item>
+  </div>
+  </div>
+
+  <div align="middle">        
+  <div  style="color:black" ion-button  icon-left clear (click)="buildForm()">
+  <ion-icon  color="secondary" name="add"></ion-icon>
+   Add 
+   </div>
+
+    <div style="color:black" ion-button icon-left clear (click)="remove()">
+      <ion-icon color="danger" name="close"></ion-icon>
+      Remove
+   </div>
+  </div>-->
 
 <ion-card>
   <ion-item>

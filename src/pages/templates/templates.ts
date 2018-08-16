@@ -24,7 +24,7 @@ export class Templates {
     tmp: Template = new Template();
     token: string;
     id: number;
-    title:any;
+    title: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public classProvider: ClassProvider,
         public toastController: ToastController, public loadingController: LoadingController,
@@ -130,7 +130,7 @@ export class Templates {
 
     resetform() {
         this.message = ''
-        this.title=''
+        this.title = ''
 
     }
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,AlertController } from 'ionic-angular';
-import{LoadingController} from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import {TeacherProvider} from '../../providers/Teacher';
 import { GlobalVars } from '../../providers/global-provider';

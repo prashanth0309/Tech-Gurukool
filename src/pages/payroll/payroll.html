@@ -5,24 +5,24 @@
 
     </button>
         <ion-title> PayRoll <br/>
-</ion-title>
-       
+        </ion-title>
+
     </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-<br>
+    <br>
     <ion-list>
         <ion-item *ngFor="let x of payroll">
-            <ion-avatar item-left id="pavt">
-                <div ><img src="assets/img/msg.png"></div>
+            <ion-avatar item-start>
+             <img src="assets/img/credit.png">
             </ion-avatar>
 
-                <h2> {{x.date}} </h2>
-                <p id="spr">Hello {{x.name}}, Your salary is credited on {{x.date}} </p>
+            <h2> {{x.date}} </h2>
+            <p id="spr">Hello {{x.name}}, Your salary is credited on {{x.date}} </p>
 
-        </ion-item>   
+        </ion-item>
     </ion-list>
 
 </ion-content>

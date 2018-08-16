@@ -3,24 +3,29 @@
     page-otp {
 
     
-    #o1{
+    .o1{
 
         background-color: white;
         color: navy;
     }
-
     #rotp{
         
              color:white;
              margin-left:6px;
             }
-
-            #partitioned:focus {
+    #otpdig{
+         font-size: 85%;
+    }
+   
+    .psize{
+        font-size: 95%;
+    }
+    #partitioned:focus {
                 outline: none;
                 color: white;
               }
             
-            #partitioned {
+    #partitioned {
                    
                    border: none;
                    width: 5.95ch;
@@ -36,6 +41,6 @@
                    letter-spacing: 0.5ch;                   
                  
                     }  
-                  
+
                 }              
 }

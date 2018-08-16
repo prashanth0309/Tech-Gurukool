@@ -36,8 +36,8 @@ export class Attendance_View {
     day: any;
     tt_id: number;
     parm_update_id: number;
-    token:string;
-    id:number;
+    token: string;
+    id: number;
 
     constructor(public loadingController: LoadingController, public navCtrl: NavController,
         public navParams: NavParams,
@@ -58,15 +58,15 @@ export class Attendance_View {
         this.parm_teacher = this.navParams.get('parm_teacher')
         this.tt_id = this.navParams.get('parm_update_id')
         this.parm_class_id = this.globalVars.getMyGlobalClass_id(this.parm_standard, this.parm_section)
-        this.token   = this.globalVars.getMyGlobalToken();
+        this.token = this.globalVars.getMyGlobalToken();
         this.id = this.globalVars.getMyGlobalUserId();
 
         if (this.parm_period.length == 0) {
             this.parm_period = "All"
         }
         this.loading()
-    //    this.fetchStudent(this.parm_class_id)
-        console.log("token "+ this.token)
+        //    this.fetchStudent(this.parm_class_id)
+        console.log("token " + this.token)
         this.fetchAttndStudent(this.tt_id, this.current_date, this.parm_class_id, this.token, this.id)
         this.loader.dismiss()
         this.student_details = new Array < Attendance > ();
@@ -79,12 +79,12 @@ export class Attendance_View {
         this.loader.present();
     }
 
-    fetchAttndStudent( tt_id:number, date:string, class_id: number, token: string, id:number) {
+    fetchAttndStudent(tt_id: number, date: string, class_id: number, token: string, id: number) {
 
         this.classProvider
             .getStudentForAttendance(tt_id, date, class_id, token, id)
             .subscribe(res => {
-                     this.student_details = <Attendance[] > res, this.loader.dismiss()
+                    this.student_details = < Attendance[] > res, this.loader.dismiss()
                 },
                 err => {
                     this.errorToast("Record not loaded", "middle"), this.loader.dismiss()
@@ -93,43 +93,41 @@ export class Attendance_View {
 
     }
 
-/*
-    fetchStudent(class_id: number) {
+    /*
+        fetchStudent(class_id: number) {
 
-        let x: Student[]
+            let x: Student[]
 
-        this.classProvider
-            .getStudentForClass(class_id)
-            .subscribe(res => {
-                    x = < Student[] > res, this.loadData(x), this.loader.dismiss()
-                },
-                err => {
-                    this.errorToast("Record not loaded", "middle"), this.loader.dismiss()
-                });
+            this.classProvider
+                .getStudentForClass(class_id)
+                .subscribe(res => {
+                        x = < Student[] > res, this.loadData(x), this.loader.dismiss()
+                    },
+                    err => {
+                        this.errorToast("Record not loaded", "middle"), this.loader.dismiss()
+                    });
 
 
-    }
-*/
-
-/*
-    loadData(y: Student[]) {
-
-        for (let n of y) {
-            let z = new Attendance()
-            z.student_id = n.student_id
-            z.student_name = n.name
-            z.student_roll_no = n.student_roll_no
-            z.attendance = n.attendance 
-            this.student_details.push(z)
         }
+    */
 
-   }
+    /*
+        loadData(y: Student[]) {
 
-*/
+            for (let n of y) {
+                let z = new Attendance()
+                z.student_id = n.student_id
+                z.student_name = n.name
+                z.student_roll_no = n.student_roll_no
+                z.attendance = n.attendance 
+                this.student_details.push(z)
+            }
 
+       }
 
+    */
 
-    fetchperiod(class_id: number, token:string, id:number) {
+    fetchperiod(class_id: number, token: string, id: number) {
         this.classProvider
             .getAllRefTimes(class_id, token, id)
             .subscribe(res => {
@@ -187,7 +185,7 @@ export class Attendance_View {
 
     }
 
-    updateAttendance(tt_id: number, class_id:number, attendance: Attendance[], token:string, id:number)
+    updateAttendance(tt_id: number, class_id: number, attendance: Attendance[], token: string, id: number)
 
     {
 

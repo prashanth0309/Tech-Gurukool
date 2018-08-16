@@ -11,7 +11,7 @@ import { NotificationProvider } from '../../providers/notification-provider';
 
 
 @Component({
-    selector: 'compliant-page',
+    selector: 'suggestion-page',
     templateUrl: 'suggestion.html',
 
 })
@@ -24,10 +24,10 @@ export class Suggestion {
     message: any;
     compliant: Template = new Template();
     comp: Template[];
-    student_id:number;
-    date:Date;
-    current_date:any;
-    parent:any;
+    student_id: number;
+    date: Date;
+    current_date: any;
+    parent: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
         public alertCtrl: AlertController, public toastCtrl: ToastController, public globalVars: GlobalVars,
@@ -38,11 +38,11 @@ export class Suggestion {
         this.id = this.globalVars.getMyGlobalUserId();
         this.school_id = this.globalVars.getMyGlobalschool();
         this.parent = this.globalVars.getMyGlobalParent();
-        this.student_id= this.parent[0].parent_student_id
+        this.student_id = this.parent[0].parent_student_id
 
-}
+    }
 
-    postSuggestion(temp: Template, student_id:number, school_id: number, token: string, id: number) {
+    postSuggestion(temp: Template, student_id: number, school_id: number, token: string, id: number) {
         this.notifyProvider
             .addCompliant(temp, student_id, school_id, token, id)
             .subscribe(res => {
@@ -85,7 +85,7 @@ export class Suggestion {
                         this.compliant.school_id = this.school_id;
                         this.compliant.update_ind = 'S'
 
-                        this.postSuggestion(this.compliant, this.student_id,this.school_id, this.token, this.id)
+                        this.postSuggestion(this.compliant, this.student_id, this.school_id, this.token, this.id)
                     }
                 },
                 {

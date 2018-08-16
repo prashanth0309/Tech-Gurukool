@@ -19,37 +19,38 @@ import { ClassReferenceTime } from '../../models/classReferenceTime';
 export class Free_Staff {
 
     time_table_notification_date_day: TimeTable[];
-    period_type:string;
-    token:string;
-    id:number;
-    class_id:number
-    period_id:number
-    teacher_name:string;
-    teacher_id:string;
+    period_type: string;
+    token: string;
+    id: number;
+    class_id: number
+    period_id: number
+    teacher_name: string;
+    teacher_id: string;
     standard: School_class_year[];
     selected_standard: any;
     selectedClassID: number;
     classRefTimes: ClassReferenceTime[];
-    selected_period:any;
+    selected_period: any;
+    freestaff: boolean;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public timetableProvider: TimeTableProvider,
-        public loadingController: LoadingController,public toastController: ToastController, public globalVars: GlobalVars, public alertCtrl: AlertController,
+        public loadingController: LoadingController, public toastController: ToastController, public globalVars: GlobalVars, public alertCtrl: AlertController,
         public classProvider: ClassProvider) {
 
-        this.period_type='Period 3'
-        this.class_id=10
+        this.period_type = 'Period 3'
+        this.class_id = 10
         //this.period_id=40
-        this.token   = this.globalVars.getMyGlobalToken();  
+        this.token = this.globalVars.getMyGlobalToken();
         this.id = this.globalVars.getMyGlobalUserId();
         this.standard = this.globalVars.getMyGlobalclass()
 
-       // this.Getstafflist(this.class_id, this.period_id, this.token, this.id)
-        
-    
-}
-class_period(y) {
+        // this.Getstafflist(this.class_id, this.period_id, this.token, this.id)
 
 
+    }
+    class_period(y) {
+
+          this.freestaff= true
         for (let x of this.standard) {
 
             if (x.standard == this.selected_standard) {
@@ -64,31 +65,34 @@ class_period(y) {
 
     }
 
-getperiod(class_id: number, token:string, id:number) {
+    getperiod(class_id: number, token: string, id: number) {
         this.classProvider
             .getAllRefTimes(class_id, token, id)
             .subscribe(res => {
-                    this.classRefTimes = < ClassReferenceTime[] > res },
+                    this.classRefTimes = < ClassReferenceTime[] > res
+                },
                 err => {
                     this.errorToast();
                 }
             );
     }
 
-change(x){
-    
-            console.log("my id is" + x.id + this.period_id)
-            this.Getstafflist(this.selectedClassID, x.id, this.token, this.id)
+    change(x) {
 
-}
+        console.log("my id is" + x.id + this.period_id)
+        this.Getstafflist(this.selectedClassID, x.id, this.token, this.id)
 
-    Getstafflist(class_id:number, period_id:number,token:string,id:number) {
+    }
+
+    Getstafflist(class_id: number, period_id: number, token: string, id: number) {
 
         this.timetableProvider
-            .getstaff_list(class_id, period_id, token,id)
+            .getstaff_list(class_id, period_id, token, id)
             .subscribe(res => {
-                    this.time_table_notification_date_day = < TimeTable[] > res },
-                err => { this.errorToast()
+                    this.time_table_notification_date_day = < TimeTable[] > res
+                },
+                err => {
+                    this.errorToast()
                 });
     }
 

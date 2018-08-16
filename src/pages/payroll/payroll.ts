@@ -8,6 +8,7 @@ import { PopoverController } from 'ionic-angular';
 import { PayrollProvider } from '../../providers/payroll';
 import { Payroll } from '../../models/payroll';
 
+
 @Component({
     selector: 'payroll-page',
     templateUrl: 'payroll.html',
@@ -16,35 +17,34 @@ import { Payroll } from '../../models/payroll';
 
 export class PayRoll {
 
- private date;
- loader:any;
- payroll:Payroll[];
- token:any;
- id:any;
-message:any;
+    private date;
+    loader: any;
+    payroll: Payroll[];
+    token: any;
+    id: any;
+    message: any;
 
-    constructor(public navCtrl: NavController, navParams: NavParams, public alertCtrl: AlertController, 
-                public globalVars: GlobalVars, public loadingController: LoadingController,
-                public toastCtrl: ToastController, public toastController: ToastController, 
-                public popoverCtrl: PopoverController, public payrollprovider: PayrollProvider){
+    constructor(public navCtrl: NavController, navParams: NavParams, public alertCtrl: AlertController,
+        public globalVars: GlobalVars, public loadingController: LoadingController,
+        public toastCtrl: ToastController, public toastController: ToastController,
+        public popoverCtrl: PopoverController, public payrollprovider: PayrollProvider) {
 
-                this.token   = this.globalVars.getMyGlobalToken();
-                this.id = this.globalVars.getMyGlobalUserId();
+        this.token = this.globalVars.getMyGlobalToken();
+        this.id = this.globalVars.getMyGlobalUserId();
 
-                this.getmessage(this.id, this.token, this.id);
-                this.loading();
+        this.getmessage(this.id, this.token, this.id);
+        this.loading();
 
-                    this.date = new Date()
-                    console.log(this.date)
-                   if( this.date = 'Feb'){
-                       console.log("Correct")
-                   }
-                   else{
-                       console.log("wrong")
-                   }
+        this.date = new Date()
+        console.log(this.date)
+        if (this.date = 'Feb') {
+            console.log("Correct")
+        } else {
+            console.log("wrong")
         }
+    }
 
- loading() {
+    loading() {
         this.loader = this.loadingController.create({
             content: "Please wait"
         });
@@ -52,7 +52,7 @@ message:any;
 
     }
 
-    getmessage(teacher_id: number, token:string, id:number) {
+    getmessage(teacher_id: number, token: string, id: number) {
         this.payrollprovider
             .getmessage(teacher_id, token, id)
             .subscribe(res => {
@@ -65,12 +65,12 @@ message:any;
             );
     }
 
-check(){
+    check() {
 
-    for(let n of this.payroll){
-        console.log(n.date + n.teacher_id + n.credited)
+        for (let n of this.payroll) {
+            console.log(n.date + n.teacher_id + n.credited)
+        }
     }
-}
     successToastreturn(msg, pos) {
 
         let toast = this.toastController.create({

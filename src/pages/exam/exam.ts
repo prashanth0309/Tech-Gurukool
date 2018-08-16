@@ -40,6 +40,7 @@ export class Exam {
     parent_standard:any;
     parent_section:any;
     id:number;
+    examsel: boolean;
 
     constructor(public navCtrl: NavController, navParams: NavParams,
 

@@ -17,39 +17,40 @@ import { PopoverController } from 'ionic-angular';
     selector: 'period-page',
     templateUrl: 'event_view.html'
 })
+
 export class Event_View {
 
-student: Student[];
-parm_class_id:any;
-parm_standard:any;
-parm_section:any;
-token:any;
-id:number;
-loader:any;
-selected_name:any;
-selected_student_id:any;
-event: EventsClass[];
-house: EventsClass[];
-evnt:EventsClass = new EventsClass();
-selected_activity:any;
-selected_house:any;
-selected_event:any;
-student_event: EventsClass[];
-selected_prize:any;
+    student: Student[];
+    parm_class_id: any;
+    parm_standard: any;
+    parm_section: any;
+    token: any;
+    id: number;
+    loader: any;
+    selected_name: any;
+    selected_student_id: any;
+    event: EventsClass[];
+    house: EventsClass[];
+    evnt: EventsClass = new EventsClass();
+    selected_activity: any;
+    selected_house: any;
+    selected_event: any;
+    student_event: EventsClass[];
+    selected_prize: any;
 
 
-     constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
-                public classprovider: ClassProvider, public loadingController: LoadingController,public popoverCtrl: PopoverController, 
-                public globalVars: GlobalVars,public eventsprovider: EventsProvider, public toastController: ToastController,) {
-       
+    constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
+        public classprovider: ClassProvider, public loadingController: LoadingController, public popoverCtrl: PopoverController,
+        public globalVars: GlobalVars, public eventsprovider: EventsProvider, public toastController: ToastController, ) {
+
         this.parm_class_id = navParams.get('parm_class_id');
         this.parm_standard = navParams.get('parm_standard');
         this.parm_section = navParams.get('parm_section');
-        this.token   = this.globalVars.getMyGlobalToken();
+        this.token = this.globalVars.getMyGlobalToken();
         this.id = this.globalVars.getMyGlobalUserId();
         this.loading();
         this.fetchStudent(this.parm_class_id, this.token, this.id);
-        this.gethouse( "House", this.token, this.id)
+        this.gethouse("House", this.token, this.id)
 
     }
 
@@ -62,7 +63,7 @@ selected_prize:any;
         this.loader.present();
     }
 
-     fetchStudent(class_id: number, token:string, id:number) {
+    fetchStudent(class_id: number, token: string, id: number) {
 
 
         this.classprovider
@@ -71,11 +72,11 @@ selected_prize:any;
                     this.student = < Student[] > res, this.loader.dismiss()
                 },
                 err => {
-                     this.loader.dismiss()
+                    this.loader.dismiss()
                 });
     }
 
-     getevents(activity:string , token: string, id: number) {
+    getevents(activity: string, token: string, id: number) {
         this.eventsprovider
             .getevents(activity, token, id)
             .subscribe(res => {
@@ -89,7 +90,7 @@ selected_prize:any;
             );
     }
 
-    gethouse(activity:string , token: string, id: number) {
+    gethouse(activity: string, token: string, id: number) {
         this.eventsprovider
             .getevents(activity, token, id)
             .subscribe(res => {
@@ -103,25 +104,25 @@ selected_prize:any;
             );
     }
 
-    select_event(){
-            
-            this.getevents(this.selected_activity, this.token, this.id)
-    
+    select_event() {
+
+        this.getevents(this.selected_activity, this.token, this.id)
+
     }
 
     changerecord(x) {
 
         this.selected_student_id = x.student_id;
         this.selected_name = x.name
-        this.getstudentevent(x.student_id , this.token, this.id)
+        this.getstudentevent(x.student_id, this.token, this.id)
 
         console.log("id" + this.selected_student_id + this.selected_name)
 
     }
-    
-    addstudentevents( event:EventsClass, student_id:number, token: string, id: number) {
+
+    addstudentevents(event: EventsClass, student_id: number, token: string, id: number) {
         this.eventsprovider
-            .addstudentevents( event, student_id ,token, id)
+            .addstudentevents(event, student_id, token, id)
             .subscribe(res => {
                     this.successToastreturn('Record updated', 'middle'), this.reload()
                 },
@@ -132,14 +133,14 @@ selected_prize:any;
             );
     }
 
-    
+
     reload() {
 
-        this.getstudentevent(this.selected_student_id , this.token, this.id)
+        this.getstudentevent(this.selected_student_id, this.token, this.id)
 
     }
 
-    getstudentevent(student_id:number , token: string, id: number) {
+    getstudentevent(student_id: number, token: string, id: number) {
         this.eventsprovider
             .getstudentevents(student_id, token, id)
             .subscribe(res => {
@@ -153,9 +154,9 @@ selected_prize:any;
             );
     }
 
-    check(){
+    check() {
 
-        for(let x of this.student_event){
+        for (let x of this.student_event) {
             this.selected_house = x.house_name
         }
     }
@@ -215,29 +216,29 @@ selected_prize:any;
 
     }
 
-    save(){
-       
+    save() {
+
         this.evnt.student_id = this.selected_student_id;
         this.evnt.house_name = this.selected_house;
         this.evnt.activity = this.selected_activity;
         this.evnt.name = this.selected_event;
         this.evnt.prize = this.selected_prize;
 
-            this.addstudentevents( this.evnt, this.selected_student_id, this.token, this.id)
+        this.addstudentevents(this.evnt, this.selected_student_id, this.token, this.id)
 
 
     }
     presentPopover(myEvent) {
-        
-    let popover = this.popoverCtrl.create(PopoverPage, {
-        
-    });
-        
-    popover.present({
-    ev: myEvent
-        
-    });
-        
-  }
+
+        let popover = this.popoverCtrl.create(PopoverPage, {
+
+        });
+
+        popover.present({
+            ev: myEvent
+
+        });
+
+    }
 
 }

@@ -15,7 +15,12 @@
    <ion-label  *ngIf="role_header" id="use1">parent</ion-label>
    <ion-label  *ngIf="!role_header"id="use1">Teacher</ion-label>
   <!-- <img id="img" src="assets/img/aniruthnew11.png"(click)="presentActionSheet()">-->
-  <img  [src]="image" id="img" (press)="presentActionSheet()" imageViewer/>
+  <ion-avatar>
+ <img  [src]="image" id="img" (press)="presentActionSheet()" imageViewer/>
+  </ion-avatar>
+ <!--<ion-fab bottom>
+ <button color="danger" ion-fab mini><ion-icon align= "middle" item-end small name="camera" ></ion-icon></button>
+ </ion-fab>--> 
 </ion-toolbar>
   </ion-header>
 

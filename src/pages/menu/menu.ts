@@ -39,6 +39,7 @@ import { Other_Notification } from '../other_notification/other_notification';
 import { Event_Notification } from '../event_notification/event_notification';
 import { Gallery } from '../gallery/gallery';
 import { Quizz } from '../quizz/quizz';
+import { QuizSel } from '../quizsel/quizsel';
 
 @Component({
     selector: 'page-menu',
@@ -138,9 +139,8 @@ export class Menu {
                 this.globalVars.setMyGlobalToken(this.token) 
                 this.globalVars.setMyGlobalrole(this.role_type, this.id)
                 this.globalVars.setMyGlobalSchoolConstant(this.start_time, this.end_time)
-                console.log("mytime" + this.start_time + this.end_time)
                 this.id = this.globalVars.getMyGlobalUserId();
-                this.fetchstandard(this.school_id,this.acad_year,this.token, this.id);            
+                this.fetchstandard(this.school_id,this.acad_year,this.token, this.id);   
             }
         }); 
 
@@ -166,7 +166,6 @@ export class Menu {
               });
             });            
     }
-
 
     /***********************************************************************************************************************************
      *  Run the loader untill the menus are loaded and services are run.                                                                *                                                                                                     *    
@@ -324,6 +323,7 @@ loadRecords() {
             let alert = this.alertCtrl.create({
                 title: 'User Login',
                 message: 'Do you want to login to app as a:',
+                enableBackdropDismiss: false,
                 buttons: [{
                         text: 'Parent',
                         handler: () => {
@@ -453,6 +453,11 @@ loadRecords() {
                     component: Quiz_Select,
                     icon: "school"
                 },
+              /*  {
+                    title: 'Quiz',
+                    component: QuizSel,
+                    icon: "school"
+                },*/
                 {
                     title: 'Compliant Box',
                     component: Compliant,
@@ -466,12 +471,12 @@ loadRecords() {
                 {
                     title: 'Event Notification',
                     component: Event_Notification,
-                    icon: "school"
+                    icon: "notifications"
                 },
                 {
                     title: 'Logout',
                     component: null,
-                    icon: "exit"
+                    icon: "log-out"
                 }
             ];
 
@@ -496,7 +501,7 @@ loadRecords() {
                 {
                     title: 'Free Staff List',
                     component: Free_Staff,
-                    icon: "calendar"
+                    icon: "list-box"
                 },
                 {
                     title: 'Daily Diary',
@@ -511,17 +516,17 @@ loadRecords() {
                 {
                     title: 'Teacher Attendance',
                     component: Teacher_attendance,
-                    icon: "timer"
+                    icon: "people"
                 },
                 {
                     title: 'Bus Attendance',
                     component: Bus_attendance,
-                    icon: "timer"
+                    icon: "bus"
                 },
                 {
                     title: 'Attendance View',
                     component: Attendance_Class_Select,
-                    icon: "timer"
+                    icon: "eye"
                 },
                  {
                     title: 'Gallery',
@@ -531,7 +536,7 @@ loadRecords() {
                 {
                     title: 'PayRoll',
                     component: PayRoll,
-                    icon: "clipboard"
+                    icon: "card"
                 },
                 {
                     title: 'House',
@@ -550,11 +555,11 @@ loadRecords() {
                     component: Quiz_Select,
                     icon: "school"
                 },
-                {
+              /*  {
                     title: 'Quiz',
                     component: Quizz,
                     icon: "school"
-                },
+                },*/
 
                 {
                     title: 'Parent Meet',
@@ -576,7 +581,7 @@ loadRecords() {
                 {
                     title: 'Logout',
                     component: null,
-                    icon: "exit"
+                    icon: "log-out"
                 }
             ];
         //    this.activePage = this.pages[0]
@@ -626,9 +631,9 @@ loadRecords() {
         } else {
             let alert = this.alertCtrl.create({
                 title: 'Logout',
-                message: 'Do you Want to Logout this user?',
+                message: 'Are you sure you want to log out?',
                 buttons: [{
-                        text: 'Ok ',
+                        text: 'Yes ',
                         handler: () => {
                            this.storage.remove('user') 
                            this.navCtrl.setRoot(Login)
@@ -638,7 +643,7 @@ loadRecords() {
                         }
                     },
                     {
-                        text: 'cancel ',
+                        text: 'No ',
                         handler: () => {
                             console.log("Logout cancel");
                         }
@@ -763,29 +768,28 @@ loadRecords() {
     }
 
     
-   selectPicture(ht: number, qlt: number){
-        
-        
-        
+   selectPicture(){
+                
             let cameraOptions = {
         
                 sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         
                 destinationType: this.camera.DestinationType.DATA_URL, //Camera.DestinationType.FILE_URI,      
         
-                quality: qlt,
+                quality: 75,       //qlt,
         
-                targetWidth: ht,
+                targetWidth:90,     // ht,
         
-                targetHeight: ht,
+                targetHeight: 90,      //ht,
         
                 encodingType: this.camera.EncodingType.JPEG,      
         
-                correctOrientation: true
+                correctOrientation: true,
+
+                allowEdit: true,   
+    
         
             }
-        
-        
         
                 this.camera.getPicture(cameraOptions)
         
@@ -802,7 +806,6 @@ loadRecords() {
               if(this.role_type = "P"){
 
                 this.parent = this.globalVars.getMyGlobalParent()
-                
                 this.tg_id =this.parent[0].parent_student_id
                 console.log("parent student_id" +this.tg_id)
                 
@@ -810,16 +813,14 @@ loadRecords() {
 
             else {
                  
-                this.teacher = this.globalVars.getMyGlobalTeacher()
+                this.teacher = this.globalVars.getMyGlobalTeacher() 
                 this.tg_id = this.teacher[0].teacher_id
-                console.log("teacher_id" +this.tg_id)                
-
+                console.log("teacher_id" +this.tg_id) 
+                
              }
                  this.imageProvider
-        
                 .addImageToSchool(this.tg_id,scimage,this.token,this.id)
-        
-                .subscribe(res => {this.successToastreturn()},
+                .subscribe(res => {this.successToastreturn(), this.reload()},
         
                           err => {this.errorToast("Failed to upload: " + err)}
         
@@ -833,19 +834,21 @@ loadRecords() {
         
             }
         
-            takePicture(ht: number, qlt: number)
+            takePicture()
         
             {
-        
+
             this.camera.getPicture({
         
                 destinationType: this.camera.DestinationType.DATA_URL,
+
+                allowEdit: true,
+                
+                quality:75,      //qlt,
         
-                quality: qlt,
+                targetWidth:90,  //ht,
         
-                targetWidth: ht,
-        
-                targetHeight: ht,
+                targetHeight:90, //ht,
         
             }).then((imageData) => {
         
@@ -869,7 +872,7 @@ loadRecords() {
                 else {
                      this.teacher = this.globalVars.getMyGlobalTeacher()
                      this.tg_id = this.teacher[0].teacher_id
-
+                     
                      console.log("teacher_id" +this.tg_id)
                      
                     
@@ -879,7 +882,7 @@ loadRecords() {
         
                 .addImageToSchool(this.tg_id, scimage, this.token, this.id)
         
-                .subscribe(res => {this.successToastreturn()},
+                .subscribe(res => {this.successToastreturn(), this.reload()},
         
                           err => {this.errorToast("Failed to upload: " + err)}
         
@@ -927,7 +930,7 @@ loadRecords() {
           icon:"folder",
           handler: () => {
          
-              this.selectPicture(this.ht, this.qlt)
+              this.selectPicture()
           }
         },
         {
@@ -935,7 +938,7 @@ loadRecords() {
           icon:"camera",
           handler: () => {
 
-            this.takePicture(this.ht, this.qlt)
+            this.takePicture()
           
           }
     
@@ -954,6 +957,11 @@ loadRecords() {
     actionSheet.present();
   }
 
+  reload(){
+
+     this.fetchimage(this.tg_id, this.token, this.id)
+  }
+
   fetchimage(tg_id: number, token:string, id:number) {
 
     console.log ("I am coming here to fetch image sessions")
@@ -970,7 +978,7 @@ loadRecords() {
             for(let i of this.schoolimage){
                 this.image = i.url
                 console.log(i.url +"check")
-                     console.log("image" + i.url + this.image)
+                console.log("image" + i.url + this.image)
             }
         }
     

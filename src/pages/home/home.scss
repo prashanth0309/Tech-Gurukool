@@ -20,13 +20,16 @@
         ion-title,
         ion-segment {
             font-family: 'Oswald', sans-serif;
+            //color: #0091d2;
         }
        
-        #tik {
+        .tik {
             position: relative;
             bottom: -1px;
+            width: 14px;
+            height: 14px;
         }
-        #dda {
+        .dda {
             line-height: 18px;
             white-space: pre-line;
             position: relative;
@@ -52,10 +55,10 @@
             color: cornflowerblue;
         }
        
-        #avt {
+     /* .avt {
             position: relative;
-            top: -14px;
-        }
+            top:-14px; //4%;
+        }*/
         h2 {
             font-weight: bold;
         }
@@ -110,14 +113,6 @@
             color: white;
             border: 5px solid #4FC3F7; //cornflowerblue;
             border-radius: 5px;
-        }
-        .header-image {
-            background-image: url(https://ununsplash.imgix.net/photo-1421091242698-34f6ad7fc088?fit=crop&fm=jpg&h=650&q=75&w=950);
-            height: 40vh;
-        }
-        .main-content {
-            padding: 20px;
-            background-color: white;
         }
         .animated {
             animation-duration: 2s;

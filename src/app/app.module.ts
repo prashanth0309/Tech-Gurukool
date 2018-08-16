@@ -75,6 +75,7 @@ import { Prize_List } from '../pages/prize_list/prize_list';
 import { Gallery } from '../pages/gallery/gallery';
 import { Quizz } from '../pages/quizz/quizz';
 import { Quizq } from '../pages/quizq/quizq';
+import { QuizSel } from '../pages/quizsel/quizsel';
 
 /*Providers & Services*/
 import { ClassProvider } from '../providers/class-provider';
@@ -159,7 +160,8 @@ import { QuizProv } from '../providers/quiz';
     Prize_List,
     Gallery,
     Quizz,
-    Quizq
+    Quizq,
+    QuizSel
 
   ],
   imports: [
@@ -233,7 +235,8 @@ import { QuizProv } from '../providers/quiz';
     Prize_List,
     Gallery,
     Quizz,
-    Quizq
+    Quizq,
+    QuizSel
 
     ],
 

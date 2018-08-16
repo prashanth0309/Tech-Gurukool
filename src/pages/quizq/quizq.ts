@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,ViewChild} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { LoadingController, ToastController,PopoverController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
@@ -9,17 +9,18 @@ import { PopoverPage } from '../../pages/popover/popover';
 import { QuizProv } from '../../providers/quiz';
 import { FormBuilder, FormArray, FormGroup, Validators,FormControl } from '@angular/forms';
 
-export interface item{
+/*export interface item{
 
     options: any;
     isRightAnswer:boolean
-}
+}*/
+
 
 @Component({
     templateUrl: 'quizq.html',
     selector: 'quizq-page'
 })
-export class Quizq {
+export class Quizq {  
 
     parm_start_date:any;
     parm_end_date :any;
@@ -41,9 +42,11 @@ export class Quizq {
   //toggleNew: boolean = false;
   //  todos:string[]= this.getTodos();
     public form: FormGroup;
-    items: item[];
-    
+  //  items: item[];
+  options:any;
+  isRightAnswer: any;
   
+    
     constructor(public navCtrl: NavController, navParams: NavParams,  public alertCtrl: AlertController,
         public globalVars: GlobalVars,public toastController: ToastController, public popoverCtrl:PopoverController,
         public quizProvider: QuizProv,public loadingController: LoadingController,private FB : FormBuilder){
@@ -61,123 +64,43 @@ export class Quizq {
             this.parm_duration_mins    = navParams.get('parm_duration_mins');
             this.parm_attempts_allowed = navParams.get('parm_attempts_allowed')
               
-        /*    this.form = this.FB.group({
-                answers       	  : ['', Validators.required],
-                options     : this.FB.array([
-                   this.initAnswerFields()
-                ])
-             });*/
-
-         /*    this.form = new FormGroup({
-                question: new FormControl('', Validators.required), 
-                explanation: new FormControl('', Validators.required), 
-             //   isRightAnswer: new FormControl('', Validators.required),                 
-               /* answers: new FormArray([
-                    this.initAns(),
-                ]),                              
-                options: new FormArray([
-                  new FormControl(''),
-
-                              
-                ]),
-				
-				isRightanswer: new FormArray([
-				  new FormControl(),
-
-				])
-                
-              });
-            
-    */
-
-}
-ngOnInit() {
-    this.form = this.FB.group({
-        question: new FormControl('', Validators.required), 
-        explanation: new FormControl('', Validators.required),
-        items: this.FB.array([ 
-
-
-           this.createItem()
-           
-         ]), 
-    });
-  //  this.addItem()       
-    
-  }
-
-
-  createItem(): FormGroup {
-    return this.FB.group({
-      options: [''],
-      isRightAnswer:[false]
-    
-    });    
-    
-  }
-
-   addItem(): void {
-   // this.items = this.form.get('items') as FormArray;    
-    
-   // this.items.push(this.createItem());
-
-   const control = <FormArray>this.form.controls['items'];
-  // const addrCtrl = this.createItem();
-   control.push(this.createItem());
-   
-  }
-
-  remove(i : number) : void{
-    
-        const control = <FormArray>this.form.controls['items'];
-        control.removeAt(i);
-     
-    
-    }
-    
- /* get options(): FormArray { return this.form.get('options') as FormArray;}
-  
-  
-
-  addOption() { 
-      
-    this.options.push(new FormControl());
-
 
 }
 
-  remove(i : number) : void{
 
-    const control = <FormArray>this.form.controls['options'];
-    control.removeAt(i);
- 
+    ngOnInit() {
+        this.form = this.FB.group({
+            question: new FormControl('', Validators.required), 
+            explanation: new FormControl('', Validators.required),
+            items: this.FB.array([ 
+                this.FB.group({
+                  //  'options': ['', Validators.required],
+                    //'isRightAnswer': ['false', Validators.required]
+                  })        
+                   
+             ]), 
+            })
+            this.initEvents()
+        }
 
-}
+      initEvents() {
+            return this.FB.group({
+              'options': ['', Validators.required],
+              'isRightAnswer': ['false', Validators.required]
+            });
+          }
+          
 
-get answers(): FormArray { return this.form.get('isRightAnswer') as FormArray; }
-
-
-
-addAnswer() { 
-  
-    this.answers.push(new FormControl());
-
-
-}
-//addAnswer() { this.answers.push(new FormControl());}
-
-
-  removeAnswer(i : number) : void{
-
-    const control = <FormArray>this.form.controls.answers;
-    control.removeAt(i);
+       addItem(i: number) {
+            const control = <FormArray>this.form.controls['items'];
+            control.push(this.initEvents());
+                  }
     
-}
-
-//get answers(): FormArray { return this.form.get('answers') as FormArray; }
-*/
-
-
+          remove(i: number) {
+            const control = <FormArray>this.form.controls['items'];
+            control.removeAt(i);
+                  }
+    
 
 loading() {
     this.loader = this.loadingController.create({
@@ -210,13 +133,14 @@ successToastreturn(msg, pos) {
         }
  
     onSubmit(){
-        
-           
+        if( this.form.valid ) {
+            
+         
          let quiz: Quizzr[] =new Array <  Quizzr >();
 
          
          let quizz: Quizzr = new Quizzr();
-
+  
          
          quizz.title                = this.parm_title
          quizz.description          = this.parm_description
@@ -234,7 +158,6 @@ successToastreturn(msg, pos) {
          quizz.explanation          = this.form.value.explanation      
          quizz.answer               = this.form.value.options
          quizz.is_right_answer      = this.form.value.isRightAnswer
-
          quizz.attempt_id           = 1
         
          quiz.push(quizz)       
@@ -245,10 +168,9 @@ successToastreturn(msg, pos) {
 
         console.log(this.parm_title +this.parm_description + this.parm_quiz_type 
         + this.parm_start_date  + this.parm_end_date +  this.parm_duration_mins +  this.parm_attempts_allowed
-     + this.form.value.question + this.form.value.explanation +  this.form.value.options +
-       this.form.value.isRightAnswer)
+     + this.form.value.question + this.form.value.explanation +  this.form.value.options,this.form.value.isRightAnswer)
     
-     //  } 
+        }//  } 
 }
 
 

@@ -1,10 +1,10 @@
 <ion-header transparent>
     <ion-navbar color="appheader" align-title="center">
-     <button ion-button menuToggle>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
         <ion-title>
-        Compliant View
+            Compliant View
         </ion-title>
         <ion-buttons end>
             <button ion-button (click)="presentPopover($event)">
@@ -12,13 +12,13 @@
       </button>
         </ion-buttons>
     </ion-navbar>
-    </ion-header>
+</ion-header>
 
-  <ion-content>
+<ion-content>
 
     <ion-segment [(ngModel)]="segment" (ionChange)="segselected()">
 
-        <ion-segment-button value="Complaint">  Compliant </ion-segment-button>
+        <ion-segment-button value="Complaint"> Compliant </ion-segment-button>
 
         <ion-segment-button value="Suggestion"> Suggestion </ion-segment-button>
 
@@ -28,12 +28,12 @@
 
         <!--Daily Diary  !-->
         <div *ngSwitchCase="'Complaint'">
-              
-            <ion-card id ="compcard">
-                    <ion-card-header id="icv" align="middle">
-                      Compliant View
-                    </ion-card-header>
-            </ion-card>      
+
+            <ion-card id="compcard">
+                <ion-card-header id="icv" align="middle">
+                    Compliant View
+                </ion-card-header>
+            </ion-card>
             <ion-list>
                 <ion-item-sliding #slidingItem *ngFor="let c of comp">
 
@@ -41,30 +41,30 @@
                         <!--<ion-avatar  item-left>
                             <div id="avat"><img src="assets/img/exams2.png"></div>
                         </ion-avatar>-->
-                       <ion-icon item-left name="create"></ion-icon>
+                        <ion-icon item-left name="create"></ion-icon>
 
-                      <p> {{c.message}} </p>
+                        <p> {{c.message}} </p>
 
                     </ion-item>
- 
-        <ion-item-options side="right">
-        
-            <button ion-button color="danger" (click)="delete(slidingItem,c)">
+
+                    <ion-item-options side="right">
+
+                        <button ion-button color="danger" (click)="delete(slidingItem,c)">
          <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
         Delete
       </button>
                     </ion-item-options>
                 </ion-item-sliding>
             </ion-list>
-    </div>
+        </div>
 
-     <div *ngSwitchCase="'Suggestion'">
-              
-            <ion-card id ="sugcard">
-                    <ion-card-header id="isv" align="middle">
-                      Suggestion View
-                    </ion-card-header>
-            </ion-card>      
+        <div *ngSwitchCase="'Suggestion'">
+
+            <ion-card id="sugcard">
+                <ion-card-header id="isv" align="middle">
+                    Suggestion View
+                </ion-card-header>
+            </ion-card>
             <ion-list>
                 <ion-item-sliding #slidingItem *ngFor="let c of comp">
 
@@ -72,20 +72,20 @@
                         <!--<ion-avatar  item-left>
                             <div id="avat"><img src="assets/img/exams2.png"></div>
                         </ion-avatar>-->
-                       <ion-icon item-left name="create"></ion-icon>
+                        <ion-icon item-left name="create"></ion-icon>
 
-                      <p> {{c.message}} </p>
+                        <p> {{c.message}} </p>
 
                     </ion-item>
- 
-        <ion-item-options side="right">
-        
-            <button ion-button color="danger" (click)="delete(slidingItem,c)">
+
+                    <ion-item-options side="right">
+
+                        <button ion-button color="danger" (click)="delete(slidingItem,c)">
          <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
         Delete
       </button>
-         
-          <button ion-button color="rev" (click)="sugges(slidingItem,c)">
+
+                        <button ion-button color="rev" (click)="sugges(slidingItem,c)">
            <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
         Suggestion
       </button>
@@ -93,6 +93,6 @@
                 </ion-item-sliding>
             </ion-list>
         </div>
-        </div>
-          <!--  </ion-card>-->
-        </ion-content>        
+    </div>
+    <!--  </ion-card>-->
+</ion-content>

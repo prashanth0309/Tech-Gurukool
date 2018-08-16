@@ -47,6 +47,8 @@ export class DailyDairy_Post {
     teacher:any;
     time:any;
     current_date:any;
+    selected_message:any;
+    selected_title:any;
 
     constructor(public navCtrl: NavController,
         public platform: Platform,
@@ -130,9 +132,6 @@ export class DailyDairy_Post {
      *************************************************************************************************************************************/
 
     /* Success Toast messages; After Edit go back to view screen */
-    ngOnInit(){
-        
-    }
     
     submit() {
 
@@ -174,7 +173,7 @@ export class DailyDairy_Post {
 
                 let alert = this.alertCtrl.create({
                         title: 'Alert Message',
-                        message: "You Can't Post DailyDiary after 6 PM",
+                        message: "You Can't Post DailyDiary Between 6 PM To 8:59 AM ",
                         buttons: [
                             {
                                 text: 'Ok ',
@@ -226,8 +225,7 @@ export class DailyDairy_Post {
 
         this.dailyForm.reset({
             selected_activity: 'H',
-            selected_to_date: this.selected_to_date
-
+            selected_to_date: this.selected_to_date,
         });
     }
 
@@ -342,13 +340,12 @@ export class DailyDairy_Post {
     selectchange(args){ 
           
           this.dailyForm.controls['selected_message'].setValue(args);
-
     } 
 
     selecttitle(args){ 
                   
           this.dailyForm.controls['selected_title'].setValue(args);
-
+          
         }
 
 
